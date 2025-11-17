@@ -319,3 +319,75 @@ a:active {
 .navbar-nav .nav-link.active {
     background-color: #4d6cc3;
 }
+
+/* Numeruoto sąrašo dizainas su skaitikliu */
+.custom-ol {
+    counter-reset: item; /* Skaitiklio pradžia */
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.custom-ol li {
+    list-style: none; /* Paslepiame standartinę numeraciją */
+
+    counter-increment: item;
+    margin: 10px 0;
+    padding-left: 40px;
+    position: relative;
+}
+
+/* Skaitiklio pseudo-elementas */
+.custom-ol li::before {
+    content: counter(item) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2b4cad;
+}
+
+/* Vaikiniai sąrašai (ul ar ol sąrašo viduje) */
+.custom-ol li ol,
+.custom-ol li ul,
+.custom-ul li ul,
+.custom-ul li ol {
+    margin-top: 8px;
+    margin-left: 20px;
+    padding-left: 15px;
+}
+
+/* Vaikinių punktų žyma */
+.custom-ul li ul li::before {
+    content: "•";
+    color: #6a85e6;
+    font-size: 1.1rem;
+}
+
+.services-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    text-align: center;   /* Turinio lygiavimas centre */
+}
+
+.services-table th,
+.services-table td {
+    padding: 14px 18px;   /* Vienodi cell padding */
+}
+
+.services-table thead tr {
+    background-color: #1b4b9c;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.services-table tbody tr:nth-child(even) {
+    background-color: #3d5fbd; /* šviesi mėlyna */
+}
+
+.services-table tbody tr:nth-child(odd) {
+    background-color: #141516;
+}
