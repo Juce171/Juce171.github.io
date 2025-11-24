@@ -391,3 +391,234 @@ a:active {
 .services-table tbody tr:nth-child(odd) {
     background-color: #141516;
 }
+
+/* Fade-in animacija */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}
+
+
+/* Animacija visoms sekcijoms */
+.section-fade {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+
+/* Socialinių ikonų šokinėjimo animacija */
+@keyframes bounceIcon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Taikymas ikonoms */
+.social-icon {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.social-icon:hover {
+    animation: bounceIcon 0.6s ease-in-out;
+}
+
+/* ----------- PRELOADER ---------- */
+
+.preloader {
+    width: 100%;
+    height: 100vh;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dots {
+    display: flex;
+    gap: 10px;
+}
+
+.dots div {
+    width: 12px;
+    height: 12px;
+    background: #3498db;
+    border-radius: 50%;
+    animation: pulsing 5s infinite ease-in-out;
+}
+
+.dots div:nth-child(1) { animation-delay: 0s; }
+.dots div:nth-child(2) { animation-delay: 1s; }
+.dots div:nth-child(3) { animation-delay: 2s; }
+
+@keyframes pulsing {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.6); opacity: 0.4; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+
+
+/* ----------- ANIMUOTAS GRADIENTAS SERVICES SEKCIAI ----------- */
+
+.services {
+    background: linear-gradient(135deg,
+        #6a11cb,
+        #2575fc,
+        #ff6a88,
+        #f3a183
+    );
+    background-size: 300% 300%;
+    animation: gradientMove 12s ease infinite;
+    padding: 60px 20px;
+    color: white;
+    border-radius: 10px;
+}
+
+/* Gradiento judėjimo animacija */
+@keyframes gradientMove {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.about {
+    position: relative;
+    padding: 80px 20px;
+    background: #413232;
+    overflow: hidden;
+}
+
+/* Bendras stilius figūroms */
+.shape {
+    position: absolute;
+    opacity: 0.6;
+}
+
+/* ---------- APSKRITIMAS ---------- */
+.shape.circle {
+    top: 20%;
+    left: 10%;
+    animation: floatCircle 6s ease-in-out infinite;
+}
+
+.shape.circle .inner {
+    width: 60px;
+    height: 60px;
+    background: #3498db;
+    border-radius: 50%;
+    animation: rotateCircle 10s linear infinite;
+}
+
+/* ---------- TRIKAMPIS ---------- */
+.shape.triangle {
+    top: 60%;
+    left: 70%;
+    animation: floatTriangle 8s ease-in-out infinite;
+}
+
+.shape.triangle .inner {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 60px solid #e74c3c;
+    animation: rotateTriangle 12s linear infinite;
+}
+
+/* ---------- KVADRATAS ---------- */
+.shape.square {
+    top: 40%;
+    left: 50%;
+    animation: floatSquare 7s ease-in-out infinite;
+}
+
+.shape.square .inner {
+    width: 50px;
+    height: 50px;
+    background: #f1c40f;
+    animation: scaleSquare 6s ease-in-out infinite;
+}
+
+/* ---------------- ANIMATIONS ---------------- */
+
+/* Sukimasis */
+@keyframes rotateCircle {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateTriangle {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+
+/* Didėjimas / mažėjimas */
+@keyframes scaleSquare {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+}
+
+/* Judėjimas – Floating */
+@keyframes floatCircle {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes floatTriangle {
+    0% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-15px) translateX(10px); }
+    50% { transform: translateY(0) translateX(20px); }
+    75% { transform: translateY(15px) translateX(10px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes floatSquare {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-25px) translateX(15px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+
+/* @media (prefers-reduced-motion: reduce) {
+
+    Fade-in sekcijos
+    .section-fade {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    Preloader
+    .preloader, .preloader .dots div {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    Services gradient background
+    .services {
+        animation: none !important;
+        background-size: auto !important;
+        background-position: center !important;
+    }
+
+    About sekcijos figūros
+    .shape, .shape .inner {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+} */
