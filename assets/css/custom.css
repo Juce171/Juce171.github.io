@@ -637,3 +637,14 @@ a:active {
     display: none;
     z-index: 9999;
 }
+
+.input-error {
+    border: 2px solid red !important;
+}
+
+.error-msg {
+    color: red;
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+}
