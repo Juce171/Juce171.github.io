@@ -622,3 +622,18 @@ a:active {
         opacity: 1 !important;
     }
 } */
+
+/* Paprastas sėkmės pranešimo pop-up */
+#successPopup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-size: 16px;
+    display: none;
+    z-index: 9999;
+}
