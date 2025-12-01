@@ -1098,10 +1098,9 @@
 
           <div class="col-lg-7">
             <div class="contact-form">
-              <h3>Get In Touch</h3>
-              <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis.</p>
+              <h3>Contact</h3>
 
-              <form action="forms/contact.php" method="post" class="php-email-form">
+              <!-- <form action="forms/contact.php" method="post" class="php-email-form">
                 <div class="row gy-4">
 
                   <div class="col-md-6">
@@ -1129,7 +1128,66 @@
                   </div>
 
                 </div>
+              </form> -->
+              <form id="contactForm">
+                <div class="row gy-4">
+
+                  <div class="col-md-6">
+                    <label class="form-label">Vardas:</label>
+                    <input type="text" id="firstName" class="form-control" required>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label">Pavardė:</label>
+                    <input type="text" id="lastName" class="form-control" required>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label">El. paštas:</label>
+                    <input type="email" id="email" class="form-control" required>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label">Telefono numeris:</label>
+                    <input type="tel" id="phone" class="form-control">
+                  </div>
+
+                  <div class="col-12">
+                    <label class="form-label">Adresas:</label>
+                    <input type="text" id="address" class="form-control">
+                  </div>
+
+                  <div class="col-12 mt-3">
+                    <h4 class="mb-3">Įvertinimo klausimai (1–10):</h4>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label">Klausimas 1:</label>
+                    <input type="number" id="q1" class="form-control" min="1" max="10">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label">Klausimas 2:</label>
+                    <input type="number" id="q2" class="form-control" min="1" max="10">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label">Klausimas 3:</label>
+                    <input type="number" id="q3" class="form-control" min="1" max="10">
+                  </div>
+
+                  <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5">Submit</button>
+                  </div>
+
+                </div>
               </form>
+
+              <!-- Rezultatų vieta -->
+              <div id="formResult" class="mt-4"></div>
+              <div id="successPopup">Duomenys pateikti sėkmingai!</div>
+              <div id="formResult" class="mt-4"></div>
+
 
             </div>
           </div>
@@ -1137,7 +1195,6 @@
         </div>
 
       </div>
-
     </section><!-- /Contact Section -->
     
 
@@ -1180,6 +1237,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
 
 </body>
 
