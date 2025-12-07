@@ -1198,6 +1198,40 @@
       </div>
     </section><!-- /Contact Section -->
     
+    <!-- Game Section -->
+    <section id="game-section">
+    <h2>Mano Žaidimas</h2>
+
+    <!-- Difficulty Selection -->
+    <div id="difficulty">
+        <label><input type="radio" name="level" value="easy" checked> Lengvas (4x3)</label>
+        <label><input type="radio" name="level" value="hard"> Sunkus (6x4)</label>
+    </div>
+
+    <!-- Game Stats -->
+    <div id="stats">
+        <p>Ėjimai: <span id="moves">0</span></p>
+        <p>Poros: <span id="pairs">0</span></p>
+        <p>Laikas: <span id="timer">0:00</span></p>
+    </div>
+
+    <!-- Best Scores -->
+    <div id="best-scores">
+        <p>Geriausias Lengvas: <span id="best-easy">-</span></p>
+        <p>Geriausias Sunkus: <span id="best-hard">-</span></p>
+    </div>
+
+    <!-- Game Board -->
+    <div id="game-board"></div>
+
+    <!-- Buttons -->
+    <button id="start-btn">Start</button>
+    <button id="reset-btn">Atnaujinti</button>
+
+    <!-- Win message -->
+    <p id="win-message" style="display:none; font-weight:bold; margin-top:15px;"></p>
+    </section>
+
 
   </main>
 
