@@ -128,6 +128,174 @@ document.addEventListener("DOMContentLoaded", function () {
     // POP-UP
     successPopup.style.display = "block";
     setTimeout(() => successPopup.style.display = "none", 2500);
-});
+    });
+
+    // ----------------- VARIABLES -----------------
+    const items = ["🍎","🍌","🍒","🍇","🥝","🍑"]; // unique cards
+    let gameArray = [];
+    let firstCard = null, secondCard = null;
+    let moves = 0, pairs = 0;
+    let level = "easy";
+
+    // Timer
+    let timerInterval;
+    let seconds = 0;
+
+    // Best scores from localStorage
+    let bestScores = {
+        easy: localStorage.getItem("best_easy") || null,
+        hard: localStorage.getItem("best_hard") || null
+    };
+
+    // DOM Elements
+    const board = document.getElementById("game-board");
+    const movesEl = document.getElementById("moves");
+    const pairsEl = document.getElementById("pairs");
+    const winMessage = document.getElementById("win-message");
+    const timerEl = document.getElementById("timer");
+    const startBtn = document.getElementById("start-btn");
+    const resetBtn = document.getElementById("reset-btn");
+
+    // Difficulty radio buttons
+    const difficultyRadios = document.querySelectorAll("input[name='level']");
+
+    // Best score display
+    function updateBestScores() {
+        const easyScoreEl = document.getElementById("best-easy");
+        const hardScoreEl = document.getElementById("best-hard");
+
+        if (easyScoreEl) easyScoreEl.textContent = bestScores.easy ? bestScores.easy : "-";
+        if (hardScoreEl) hardScoreEl.textContent = bestScores.hard ? bestScores.hard : "-";
+    }
+    updateBestScores();
+
+    // ----------------- TIMER -----------------
+    function startTimer() {
+        seconds = 0;
+        timerEl.textContent = "0:00";
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            seconds++;
+            const min = Math.floor(seconds / 60);
+            const sec = seconds % 60;
+            timerEl.textContent = `${min}:${sec.toString().padStart(2,"0")}`;
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+    }
+
+    // ----------------- START GAME -----------------
+    function startGame() {
+        // get selected level
+        level = document.querySelector("input[name='level']:checked").value;
+
+        // define board size
+        const rows = level === "easy" ? 3 : 4;
+        const cols = level === "easy" ? 4 : 6;
+
+        // prepare cards array and shuffle
+        gameArray = [...items, ...items].sort(() => Math.random() - 0.5);
+
+        // reset variables
+        firstCard = null;
+        secondCard = null;
+        moves = 0;
+        pairs = 0;
+
+        movesEl.textContent = moves;
+        pairsEl.textContent = pairs;
+        winMessage.style.display = "none";
+
+        // render board
+        renderBoard(rows, cols);
+    }
+
+    function renderBoard(r, c) {
+        board.style.gridTemplateColumns = `repeat(${c}, 1fr)`;
+        board.innerHTML = "";
+        gameArray.forEach((item, i) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.dataset.value = item;
+            card.addEventListener("click", flipCard);
+            board.appendChild(card);
+        });
+    }
+
+    // ----------------- FLIP LOGIC -----------------
+    function flipCard() {
+        if (this.classList.contains("flipped") || secondCard) return;
+
+        this.textContent = this.dataset.value;
+        this.classList.add("flipped");
+
+        if (!firstCard) {
+            firstCard = this;
+            return;
+        }
+
+        secondCard = this;
+        moves++;
+        movesEl.textContent = moves;
+
+        // check match
+        if (firstCard.dataset.value === secondCard.dataset.value) {
+            pairs++;
+            pairsEl.textContent = pairs;
+
+            firstCard = secondCard = null;
+
+            // check win
+            if (pairs === items.length) {
+                winMessage.textContent = "Laimėjote!";
+                winMessage.style.display = "block";
+                stopTimer();
+                checkBestScore(level, moves);
+            }
+
+        } else {
+            setTimeout(() => {
+                firstCard.textContent = "";
+                secondCard.textContent = "";
+                firstCard.classList.remove("flipped");
+                secondCard.classList.remove("flipped");
+                firstCard = secondCard = null;
+            }, 1000);
+        }
+    }
+
+    // ----------------- BEST SCORE -----------------
+    function checkBestScore(level, moves) {
+        if (!bestScores[level] || moves < bestScores[level]) {
+            bestScores[level] = moves;
+            localStorage.setItem(`best_${level}`, moves);
+            updateBestScores();
+        }
+    }
+
+    // ----------------- BUTTONS -----------------
+   let gameStarted = false; // track if a game has started
+
+    
+    startBtn.addEventListener("click", () => {
+        if (!gameStarted) {
+            startGame();   
+            startTimer();  
+            gameStarted = true;
+        }
+    });
+
+   
+    resetBtn.addEventListener("click", () => {
+        startGame();       
+        startTimer();      
+        firstCard = null;  
+        secondCard = null;
+        gameStarted = true; 
+        winMessage.style.display = "none"; 
+    });
+
 
 });
